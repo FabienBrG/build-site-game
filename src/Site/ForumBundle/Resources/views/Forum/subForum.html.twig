@@ -8,19 +8,20 @@
                 <div class="panel-body">
                     <!-- List group -->
                     <ul class="list-group">
-                        {% for forum in forums %}
-                            <li class="list-group-item active">{{forum.titre}}</li>
+                        {% for subForum in subForums %}
+                            <li class="list-group-item active">{{subForum.titre}}</li>
                             <ul class="list-group">
-                                {% for subForum in forum.listSubForum %}
-                                    <a href="./forum/{{subForum.id}}">
+                                {% for topic in subForum.listTopic %}
+                                    <a href="forum/{{subForum.id}}">
                                         <li class="list-group-item" style="padding-bottom:30px; height:75px">
-                                            <span id="titre-topic" class="col-lg-2 col-lg-offset-1">{{subForum.titre}}
+                                            <span id="titre-topic" class="col-lg-2 col-lg-offset-1">{{topic.titre}}
                                             <br/>
-                                            <h5><small>{{subForum.description}}</small></h5>
+                                            {#<h5><small>{{subForum.description}}</small></h5>#}
                                             </span>
                                             {#
                                                 Détermination du dernier post à afficher
                                             #}
+											{#
                                             {% set lastTopic = null %}
                                             {% for topic in subForum.listTopic %}
                                                 {% if lastTopic is null %}
@@ -38,6 +39,7 @@
                                                 <h5><small>{{lastTopic.dateLastReply|time_diff}}</small></h5>
                                             {% endif %}
                                             </span>
+											#}
                                             <span id="apercu-mess" class="col-lg-3">C'était pas sa faute mais bon il a ...</span>
                                             <span id="date" class="col-lg-3">20/05/1994</span>
                                         </li>
