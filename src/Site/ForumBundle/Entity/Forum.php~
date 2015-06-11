@@ -32,11 +32,11 @@ class Forum
      * @ORM\OneToMany(targetEntity="SubForum", mappedBy="fk_forum", cascade={"remove", "persist"})
      */
     private $listSubForum;
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,7 +59,7 @@ class Forum
     /**
      * Get titre
      *
-     * @return string 
+     * @return string
      */
     public function getTitre()
     {
@@ -79,7 +79,7 @@ class Forum
      * @param \Site\ForumBundle\Entity\DeskComment $listSubForum
      * @return Forum
      */
-    public function addListSubForum(\Site\ForumBundle\Entity\DeskComment $listSubForum)
+    public function addListSubForum(\Site\ForumBundle\Entity\SubForum $listSubForum)
     {
         $this->listSubForum[] = $listSubForum;
 
@@ -91,7 +91,7 @@ class Forum
      *
      * @param \Site\ForumBundle\Entity\DeskComment $listSubForum
      */
-    public function removeListSubForum(\Site\ForumBundle\Entity\DeskComment $listSubForum)
+    public function removeListSubForum(\Site\ForumBundle\Entity\SubForum $listSubForum)
     {
         $this->listSubForum->removeElement($listSubForum);
     }
@@ -99,7 +99,7 @@ class Forum
     /**
      * Get listSubForum
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getListSubForum()
     {

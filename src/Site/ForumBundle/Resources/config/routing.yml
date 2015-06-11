@@ -5,3 +5,7 @@ site_forum_homepage:
 site_forum_subforum:
     path:     /forum/{idSubForum}
     defaults: { _controller: SiteForumBundle:Forum:subForum }
+
+site_forum_topic:
+    path:     /forum/{idSubForum}/topic/{idTopic}
+    defaults: { _controller: SiteForumBundle:Forum:topic }

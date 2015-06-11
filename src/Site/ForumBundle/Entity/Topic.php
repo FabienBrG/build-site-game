@@ -34,30 +34,35 @@ class Topic
      * @ORM\Column(name="date_creation", type="datetime")
      */
     private $dateCreation;
-    
+
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_last_reply", type="datetime")
      */
     private $dateLastReply;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="SubForum", inversedBy="listTopic", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $fk_subForum;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Site\ForumBundle\Entity\Auteur")
      * @ORM\JoinColumn(nullable=false)
      */
     private $fk_auteur;
-    
+
+	 /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="fk_topic", cascade={"remove", "persist"})
+     */
+    private $listComment;
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +85,7 @@ class Topic
     /**
      * Get titre
      *
-     * @return string 
+     * @return string
      */
     public function getTitre()
     {
@@ -103,7 +108,7 @@ class Topic
     /**
      * Get dateCreation
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateCreation()
     {
@@ -126,7 +131,7 @@ class Topic
     /**
      * Get fk_subForum
      *
-     * @return \Site\ForumBundle\Entity\SubForum 
+     * @return \Site\ForumBundle\Entity\SubForum
      */
     public function getFkSubForum()
     {
@@ -149,7 +154,7 @@ class Topic
     /**
      * Get fk_auteur
      *
-     * @return \Site\ForumBundle\Entity\Auteur 
+     * @return \Site\ForumBundle\Entity\Auteur
      */
     public function getFkAuteur()
     {
@@ -172,10 +177,50 @@ class Topic
     /**
      * Get dateLastReply
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateLastReply()
     {
         return $this->dateLastReply;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->listComment = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add listComment
+     *
+     * @param \Site\ForumBundle\Entity\Topic $listComment
+     * @return Topic
+     */
+    public function addListComment(\Site\ForumBundle\Entity\Topic $listComment)
+    {
+        $this->listComment[] = $listComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove listComment
+     *
+     * @param \Site\ForumBundle\Entity\Topic $listComment
+     */
+    public function removeListComment(\Site\ForumBundle\Entity\Topic $listComment)
+    {
+        $this->listComment->removeElement($listComment);
+    }
+
+    /**
+     * Get listComment
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getListComment()
+    {
+        return $this->listComment;
     }
 }

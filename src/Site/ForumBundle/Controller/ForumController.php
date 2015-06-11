@@ -25,4 +25,14 @@ class ForumController extends Controller
         return $this->render('SiteForumBundle:Forum:subForum.html.twig',
                              array('subForums' => $subForums));
     }
+
+	public function topicAction($idSubForum, $idTopic)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $topic= $em->getRepository('SiteForumBundle:Topic')->findBy(array('id' => $idTopic));
+
+        return $this->render('SiteForumBundle:Forum:topic.html.twig',
+                             array('topic' => $topic, 'subForum' => $idSubForum));
+    }
 }

@@ -8,13 +8,13 @@
                 <div class="panel-body">
                     <!-- List group -->
                     <ul class="list-group">
-                        {% for subForum in subForums %}
-                            <li class="list-group-item active">{{subForum.titre}}</li>
+                        {% for topic in topic %}
+                            <li class="list-group-item active">{{topic.titre}}</li>
                             <ul class="list-group">
-                                {% for topic in subForum.listTopic %}
-                                    <a href="{{subForum.id}}/topic/{{topic.id}}">
+                                {% for comment in topic.listComment %}
+                                    <a href="forum/{{subForum}}/topic/{{topic.id}}">
                                         <li class="list-group-item" style="padding-bottom:30px; height:75px">
-                                            <span id="titre-topic" class="col-lg-2 col-lg-offset-1">{{topic.titre}}
+                                            <span id="titre-topic" class="col-lg-2 col-lg-offset-1">{{comment.contenu}}
                                             <br/>
                                             {#<h5><small>{{subForum.description}}</small></h5>#}
                                             </span>

@@ -124,4 +124,44 @@ class SubForum
     {
         return $this->fk_forum;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->listTopic = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add listTopic
+     *
+     * @param \Site\ForumBundle\Entity\Topic $listTopic
+     * @return SubForum
+     */
+    public function addListTopic(\Site\ForumBundle\Entity\Topic $listTopic)
+    {
+        $this->listTopic[] = $listTopic;
+
+        return $this;
+    }
+
+    /**
+     * Remove listTopic
+     *
+     * @param \Site\ForumBundle\Entity\Topic $listTopic
+     */
+    public function removeListTopic(\Site\ForumBundle\Entity\Topic $listTopic)
+    {
+        $this->listTopic->removeElement($listTopic);
+    }
+
+    /**
+     * Get listTopic
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getListTopic()
+    {
+        return $this->listTopic;
+    }
 }
