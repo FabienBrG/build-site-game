@@ -1,57 +1,36 @@
 {% extends "::base.html.twig" %}
+
 {% block body %}
+    {% for topic in topic %}
     <div class="container">
-        <div style="margin-top:30px;padding-top:30px;">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">Forum de Guilde</div>
-                <div class="panel-body">
-                    <!-- List group -->
-                    <ul class="list-group">
-                        {% for topic in topic %}
-                            <li class="list-group-item active">{{topic.titre}}</li>
-                            <ul class="list-group">
-                                {% for comment in topic.listComment %}
-                                    <a href="forum/{{subForum}}/topic/{{topic.id}}">
-                                        <li class="list-group-item" style="padding-bottom:30px; height:75px">
-                                            <span id="titre-topic" class="col-lg-2 col-lg-offset-1">{{comment.contenu}}
-                                            <br/>
-                                            {#<h5><small>{{subForum.description}}</small></h5>#}
-                                            </span>
-                                            {#
-                                                Détermination du dernier post à afficher
-                                            #}
-											{#
-                                            {% set lastTopic = null %}
-                                            {% for topic in subForum.listTopic %}
-                                                {% if lastTopic is null %}
-                                                    {% set lastTopic = topic %}
-                                                {% elseif lastTopic.dateLastReply < topic.dateLastReply %}
-                                                    {% set lastTopic = topic %}
-                                                {% endif %}
-                                            {% endfor %}
-
-                                            {% if lastTopic is null %}
-
-                                            {% else %}
-                                                <span id="titre-last-post" class="col-lg-3 ">{{lastTopic.titre}}
-                                                <br/>
-                                                <h5><small>{{lastTopic.dateLastReply|time_diff}}</small></h5>
-                                            {% endif %}
-                                            </span>
-											#}
-                                            <span id="apercu-mess" class="col-lg-3">By @{{comment.getFkAuteur.pseudo}}</span>
-                                            <span id="date" class="col-lg-3">20/05/1994</span>
-                                        </li>
-                                    </a>
-                                {% endfor %}
-                            </ul>
-                        {% endfor %}
-                    </ul>
-                </div>
+        <div class="jumbotron"style="margin-top:30px;padding-top:10px;">
+          <div class="row">
+            <div id="titre-post">
+              <h2>{{topic.titre}}</h2>
             </div>
-        </div>
-    </div>
+          </div>
+          <br/>
+          {% for comment in topic.listComment %}
+            <div class="row">
+              <div id="info-member" class="col-lg-3">
+                <div class="col-lg-6"></div>
+                <a href="#" class="thumbnail" >
+                  <img src="{{ asset('images/avatar/'~comment.getFkAuteur.id~'.jpg')}}" alt="...">
+                </a>
+                @{{comment.getFkAuteur.pseudo}}
+              </div>
+              <div id="post" class="col-lg-6 text-justify">
+                {{comment.contenu}}
+              </div>
+              <div id="after-post" class="col-lg-3">
+                {{comment.datePublication|date('d-m-Y H:i:s')}}
+              </div>
+            </div>
+            <br/>
+           {% endfor %} 
+        </div>   
+      </div>
+    {% endfor %}
 {% endblock %}
 {% block javascripts %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
