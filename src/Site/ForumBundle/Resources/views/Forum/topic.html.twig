@@ -12,21 +12,26 @@
           <br/>
           {% for comment in topic.listComment %}
             <div class="row">
-              <div id="info-member" class="col-lg-3">
-                <div class="col-lg-6"></div>
+              <div id="info-member" class="col-lg-3 col-sm-3 col-xm-3 col-xs-6">
                 <a href="#" class="thumbnail" >
-                  <img src="{{ asset('images/avatar/'~comment.getFkAuteur.id~'.jpg')}}" alt="...">
+                  <img src="{{ asset('images/avatar/'~comment.getFkAuteur.id~'.jpg')}}" alt="..." >
                 </a>
                 @{{comment.getFkAuteur.pseudo}}
+				<br/>
+				<br/>
               </div>
-              <div id="post" class="col-lg-6 text-justify">
+			  <div class="col-xs-6"></div>
+              <div id="post" class="col-lg-6 col-sm-6 col-xm-6 col-xs-12 text-justify">
                 {{comment.contenu}}
+				<br/>
+				<br/>
               </div>
-              <div id="after-post" class="col-lg-3">
+              <div id="after-post" class="col-lg-3 col-sm-3 col-xm-3 col-xs-12 text-justify">
                 {{comment.datePublication|date('d-m-Y H:i:s')}}
               </div>
             </div>
             <br/>
+			<br/>
            {% endfor %}
 			<div class="row">
 				{{form(form)}}

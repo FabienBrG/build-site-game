@@ -14,7 +14,7 @@
                                 {% for subForum in forum.listSubForum %}
                                     <a href="./forum/{{subForum.id}}">
                                         <li class="list-group-item" style="padding-bottom:30px; height:75px">
-                                            <span id="titre-subForum" class="col-lg-2 col-lg-offset-1">{{subForum.titre}}
+                                            <span id="titre-subForum" class="col-lg-2 col-xs-3 col-lg-offset-1 ">{{subForum.titre}}
                                             <br/>
                                             <h5><small>{{subForum.description}}</small></h5>
                                             </span>
@@ -31,15 +31,15 @@
                                             {% endfor %}
 
                                             {% if lastTopic is null %}
-
+												<span id="titre-last-post" class="col-lg-3 col-xs-3 "> </span>
                                             {% else %}
-                                                <span id="titre-last-post" class="col-lg-3 ">{{lastTopic.titre}}
+                                                <span id="titre-last-post" class="col-lg-3 col-xs-3 ">{{lastTopic.titre}}
                                                 <br/>
                                                 <h5><small>{{lastTopic.dateLastReply|time_diff}}</small></h5>
                                             {% endif %}
                                             </span>
-                                            <span id="apercu-mess" class="col-lg-3">C'était pas sa faute mais bon il a ...</span>
-                                            <span id="date" class="col-lg-3">20/05/1994</span>
+                                            <span id="apercu-mess" class="col-lg-3 col-xs-3">C'était pas sa faute mais bon il a ...</span>
+                                            <span id="date" class="col-lg-3 col-xs-3">20/05/1994</span>
                                         </li>
                                     </a>
                                 {% endfor %}
