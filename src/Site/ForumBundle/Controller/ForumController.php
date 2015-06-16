@@ -58,6 +58,7 @@ class ForumController extends Controller
 				$em->persist($comment);
 				$em->flush();
 
+				return $this->redirect($this->generateUrl('site_forum_topic',array('idSubForum' => $idSubForum, 'idTopic' => $idTopic)));
 			}
 		}
 
