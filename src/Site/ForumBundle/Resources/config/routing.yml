@@ -6,6 +6,10 @@ site_forum_subforum:
     path:     /forum/{idSubForum}
     defaults: { _controller: SiteForumBundle:Forum:subForum }
 
+site_forum_createTopic:
+    path:     /forum/{idSubForum}/createTopic
+    defaults: { _controller: SiteForumBundle:Forum:createTopic }
+
 site_forum_topic:
     path:     /forum/{idSubForum}/topic/{idTopic}
     defaults: { _controller: SiteForumBundle:Forum:topic }

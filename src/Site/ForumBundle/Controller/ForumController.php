@@ -7,7 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ForumController extends Controller
 {
-    public function indexAction()
+    /**
+	 * Display forum homepage
+	 */
+	public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -17,6 +20,9 @@ class ForumController extends Controller
                              array('forums' => $forums));
     }
 
+	/**
+	 * Display subForum after homepage
+	 */
 	public function subForumAction($idSubForum)
     {
         $em = $this->getDoctrine()->getManager();
@@ -24,9 +30,12 @@ class ForumController extends Controller
         $subForums = $em->getRepository('SiteForumBundle:SubForum')->findBy(array('id' => $idSubForum));
 
         return $this->render('SiteForumBundle:Forum:subForum.html.twig',
-                             array('subForums' => $subForums));
+                             array('subForums' => $subForums, 'idSubForum' => $idSubForum));
     }
 
+	/**
+	 * Display topic with messages, avatars, author, date + form to reply
+	 */
 	public function topicAction(Request $request, $idSubForum, $idTopic)
     {
         $em = $this->getDoctrine()->getManager();
@@ -43,6 +52,9 @@ class ForumController extends Controller
 			->add('envoyer', 'submit')
             ->getForm();
 
+		/**
+		 * if submit comment
+		 */
 		if ($form->handleRequest($request)->isSubmitted()) {
             if ($form->get('envoyer')->isClicked()) {
                 $data = $form->getData();
@@ -69,4 +81,59 @@ class ForumController extends Controller
         return $this->render('SiteForumBundle:Forum:topic.html.twig',
                              array('topic' => $topic, 'subForum' => $idSubForum, 'form' => $form->createView()));
     }
+
+	/**
+	 * Create new topic
+	 */
+	public function createTopicAction(Request $request, $idSubForum)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $subForum = $em->getRepository('SiteForumBundle:SubForum')->findBy(array('id' => $idSubForum));
+
+		$form = $this->createFormBuilder()
+			->setMethod('POST')
+			->add('pseudo', 'entity', array('class' => 'SiteForumBundle:Auteur',
+                  'property' => 'pseudo'))
+			->add('sujet','text')
+			->add('comment','textarea')
+			->add('créer', 'submit')
+            ->getForm();
+
+		if ($form->handleRequest($request)->isSubmitted())
+		{
+            if ($form->get('créer')->isClicked())
+			{
+                $data = $form->getData();
+
+				$dateNow = new \DateTime('now');
+
+				$topic = new \Site\ForumBundle\Entity\Topic();
+
+				$topic->setDateCreation($dateNow);
+				$topic->setDateLastReply($dateNow);
+				$topic->setTitre($data['sujet']);
+				$topic->setFkAuteur($data['pseudo']);
+				$topic->setFkSubForum($subForum[0]);
+
+				$em->persist($topic);
+
+				$comment = new \Site\ForumBundle\Entity\Comment();
+
+				$comment->setContenu($data['comment']);
+				$comment->setFkAuteur($data['pseudo']);
+				$comment->setDatePublication($dateNow);
+				\Doctrine\Common\Util\Debug::dump($topic);
+				$comment->setFkTopic($topic);
+
+				$em->persist($comment);
+
+				$em->flush();
+
+				return $this->redirect($this->generateUrl('site_forum_subforum',array('idSubForum' => $idSubForum)));
+			}
+		}
+
+		return $this->render('SiteForumBundle:Forum:createTopic.html.twig',array('idSubForum' => $idSubForum,'form' => $form->createView()));
+	}
 }
