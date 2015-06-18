@@ -32,7 +32,7 @@ class ForumController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $topic= $em->getRepository('SiteForumBundle:Topic')->findBy(array('id' => $idTopic));
-		$auteur = $em->getRepository('SiteForumBundle:Auteur')->findAll();
+
 
 		// ->setAction($this->generateUrl('parc_info_modifier', array('idmat' => $materiel->getId())))
 		$form = $this->createFormBuilder()
@@ -47,13 +47,17 @@ class ForumController extends Controller
             if ($form->get('envoyer')->isClicked()) {
                 $data = $form->getData();
 
+				$dateNow = new \DateTime('now');
+
 				$comment = new \Site\ForumBundle\Entity\Comment();
 
 				$comment->setContenu($data['comment']);
 				$comment->setFkAuteur($data['pseudo']);
-				$comment->setDatePublication(new \DateTime('now'));
+				$comment->setDatePublication($dateNow);
 				\Doctrine\Common\Util\Debug::dump($topic);
 				$comment->setFkTopic($topic[0]);
+
+				$topic[0]->setDateLastReply($dateNow);
 
 				$em->persist($comment);
 				$em->flush();

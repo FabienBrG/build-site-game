@@ -1,4 +1,5 @@
 {% extends "::base.html.twig" %}
+
 {% block body %}
     <div class="container">
         <div style="margin-top:30px;padding-top:30px;">
@@ -14,7 +15,7 @@
                                 {% for topic in subForum.listTopic %}
                                     <a href="{{subForum.id}}/topic/{{topic.id}}">
                                         <li class="list-group-item" style="padding-bottom:30px; height:75px">
-                                            <span id="titre-topic" class="col-lg-2 col-lg-offset-1">{{topic.titre}}
+                                            <span id="titre-topic" class="col-lg-2 col-xs-2 col-lg-offset-1 col-xs-offset-1">{{topic.titre}}
                                             <br/>
                                             {#<h5><small>{{subForum.description}}</small></h5>#}
                                             </span>
@@ -40,8 +41,9 @@
                                             {% endif %}
                                             </span>
 											#}
-                                            <span id="apercu-mess" class="col-lg-3">C'était pas sa faute mais bon il a ...</span>
-                                            <span id="date" class="col-lg-3">20/05/1994</span>
+											<span class="col-lg-3 col-xs-3"></span>
+                                            <span id="apercu-mess" class="col-lg-3 col-xs-3">C'était pas sa faute mais bon il a ...</span>
+                                            <span id="date" class="col-lg-3 col-xs-3">{{topic.dateLastReply|date('d-m-Y H:i:s')}}</span>
                                         </li>
                                     </a>
                                 {% endfor %}
