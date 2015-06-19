@@ -1,5 +1,27 @@
 {% extends '::base.html.twig' %}
 
+{% block body %}
+	<div class="row text-center" style="background-color: white;">
+		<div class="container">
+			<br/>
+			<br/>
+			<br/>
+			<h1> Tu veux partager ton quotidien avec la guilde ? </h1>
+			<h1> Rejoinds-nous sur notre forum ! </h1>
+			<a href="{{path('site_forum_homepage')}}">
+				<button class="btn btn-primary btn-lg">Par ici !</button>
+			</a>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+		</div>
+	</div>
+	<div class="row" style="height:300px">
+
+	</div>
+{% endblock %}
 
 {% block javascripts %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
