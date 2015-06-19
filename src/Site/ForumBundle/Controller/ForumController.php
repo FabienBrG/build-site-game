@@ -27,10 +27,10 @@ class ForumController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $subForums = $em->getRepository('SiteForumBundle:SubForum')->findBy(array('id' => $idSubForum));
+        $subForum = $em->getRepository('SiteForumBundle:SubForum')->findBy(array('id' => $idSubForum));
 
         return $this->render('SiteForumBundle:Forum:subForum.html.twig',
-                             array('subForums' => $subForums, 'idSubForum' => $idSubForum));
+                             array('subForum' => $subForum[0], 'idSubForum' => $idSubForum));
     }
 
 	/**
@@ -40,8 +40,8 @@ class ForumController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $topic= $em->getRepository('SiteForumBundle:Topic')->findBy(array('id' => $idTopic));
-
+        $topic = $em->getRepository('SiteForumBundle:Topic')->findBy(array('id' => $idTopic));
+		$subForum = $em->getRepository('SiteForumBundle:SubForum')->findBy(array('id' => $idSubForum));
 
 		// ->setAction($this->generateUrl('parc_info_modifier', array('idmat' => $materiel->getId())))
 		$form = $this->createFormBuilder()
@@ -79,7 +79,7 @@ class ForumController extends Controller
 		}
 
         return $this->render('SiteForumBundle:Forum:topic.html.twig',
-                             array('topic' => $topic, 'subForum' => $idSubForum, 'form' => $form->createView()));
+                             array('topic' => $topic[0], 'idSubForum' => $idSubForum, 'subForum' => $subForum[0], 'form' => $form->createView()));
     }
 
 	/**

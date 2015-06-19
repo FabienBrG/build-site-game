@@ -1,9 +1,17 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    {% for topic in topic %}
     <div class="container">
         <div class="jumbotron"style="margin-top:30px;padding-top:10px;">
+		  <div class="row">
+			  <div class="breadscrumb">
+				  <a href="{{path('site_forum_homepage')}}">Forum de guilde</a>
+				  >
+				  <a href="{{path('site_forum_subforum', {'idSubForum' : subForum.id})}}">{{subForum.titre}}</a>
+				  >
+				  {{topic.titre}}
+			  </div>
+		  </div>
           <div class="row">
             <div id="titre-post">
               <h2>{{topic.titre}}</h2>
@@ -38,7 +46,6 @@
 			</div>
         </div>
       </div>
-    {% endfor %}
 {% endblock %}
 {% block javascripts %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

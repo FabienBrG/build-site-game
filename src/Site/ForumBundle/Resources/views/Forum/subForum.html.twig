@@ -7,6 +7,12 @@
                 <!-- Default panel contents -->
                 <div class="panel-heading">Forum de Guilde</div>
                 <div class="panel-body">
+					<div class="breadscrumb">
+						<a href="{{path('site_forum_homepage')}}">Forum de guilde</a>
+						>
+						{{subForum.titre}}
+					</div>
+					<br/>
 					<a href="{{path('site_forum_createTopic', {'idSubForum' : idSubForum } )}}">
 						<button class="btn btn-primary" >Nouveau Topic</button>
 					</a>
@@ -14,9 +20,6 @@
 					<br/>
                     <!-- List group -->
                     <ul class="list-group">
-
-                        {% for subForum in subForums %}
-
                             <li class="list-group-item active">{{subForum.titre}}</li>
                             <ul class="list-group">
 
@@ -59,9 +62,6 @@
                                 {% endfor %}
 
                             </ul>
-
-                        {% endfor %}
-
                     </ul>
                 </div>
             </div>
