@@ -31,30 +31,24 @@
                                             <br/>
                                             {#<h5><small>{{subForum.description}}</small></h5>#}
                                             </span>
+
                                             {#
-                                                Détermination du dernier post à afficher
+                                               Determinate last comment of topic
                                             #}
-											{#
-                                            {% set lastTopic = null %}
-                                            {% for topic in subForum.listTopic %}
-                                                {% if lastTopic is null %}
-                                                    {% set lastTopic = topic %}
-                                                {% elseif lastTopic.dateLastReply < topic.dateLastReply %}
-                                                    {% set lastTopic = topic %}
+											{% set lastComment = null %}
+                                            {% for comment in topic.listComment %}
+                                                {% if lastComment is null %}
+                                                    {% set lastComment = comment %}
+                                                {% elseif lastComment.datePublication < comment.datePublication %}
+                                                    {% set lastComment = comment %}
                                                 {% endif %}
                                             {% endfor %}
-
-                                            {% if lastTopic is null %}
-
-                                            {% else %}
-                                                <span id="titre-last-post" class="col-lg-3 ">{{lastTopic.titre}}
-                                                <br/>
-                                                <h5><small>{{lastTopic.dateLastReply|time_diff}}</small></h5>
-                                            {% endif %}
-                                            </span>
-											#}
 											<span class="col-lg-3 col-xs-3"></span>
-                                            <span id="apercu-mess" class="col-lg-3 col-xs-3">C'était pas sa faute mais bon il a ...</span>
+											{#
+												filter strptags to suppress html element
+												filter truncate to display limit comment
+											#}
+                                            <span id="apercu-mess" class="col-lg-3 col-xs-3">{{lastComment.contenu | striptags | truncate(20,true,"...") }}</span>
                                             <span id="date" class="col-lg-3 col-xs-3">{{topic.dateLastReply|date('d-m-Y H:i:s')}}</span>
                                         </li>
                                     </a>
