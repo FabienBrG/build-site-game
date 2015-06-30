@@ -30,7 +30,7 @@
               </div>
 			  <div class="col-xs-6"></div>
               <div id="post" class="col-lg-6 col-sm-6 col-xm-6 col-xs-12 text-justify">
-                {{comment.contenu}}
+                {{comment.contenu|raw}} <!-- le filtre RAW permet de retranscrire les balises HTML -->
 				<br/>
 				<br/>
               </div>
@@ -48,6 +48,7 @@
       </div>
 {% endblock %}
 {% block javascripts %}
+	{{ tinymce_init() }}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Site\ForumBundle\SiteForumBundle(),
             new Site\SiteBundle\SiteSiteBundle(),
+			new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

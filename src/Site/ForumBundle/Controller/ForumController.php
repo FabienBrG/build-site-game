@@ -48,7 +48,8 @@ class ForumController extends Controller
 			->setMethod('POST')
 			->add('pseudo', 'entity', array('class' => 'SiteForumBundle:Auteur',
                   'property' => 'pseudo'))
-			->add('comment','textarea')
+			->add('comment','textarea',
+					array('attr' => array('class'=>'tinymce','data-theme' => 'advanced')))
 			->add('envoyer', 'submit')
             ->getForm();
 
@@ -96,13 +97,14 @@ class ForumController extends Controller
 			->add('pseudo', 'entity', array('class' => 'SiteForumBundle:Auteur',
                   'property' => 'pseudo'))
 			->add('sujet','text')
-			->add('comment','textarea')
-			->add('créer', 'submit')
+			->add('comment','textarea',
+					array('attr' => array('class'=>'tinymce','data-theme' => 'advanced')))
+			->add('creer', 'submit')
             ->getForm();
 
 		if ($form->handleRequest($request)->isSubmitted())
 		{
-            if ($form->get('créer')->isClicked())
+            if ($form->get('creer')->isClicked())
 			{
                 $data = $form->getData();
 
