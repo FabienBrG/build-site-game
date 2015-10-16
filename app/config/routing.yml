@@ -5,6 +5,9 @@ site_site:
 site_forum:
     resource: "@SiteForumBundle/Resources/config/routing.yml"
 
+site_news:
+    resource: "@SiteNewsBundle/Resources/config/routing.yml"
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

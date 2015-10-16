@@ -5,14 +5,13 @@
         <!-- <div style="margin-top:30px;padding-top:30px;"> -->
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Forum de Guilde</div>
-                <div class="panel-body">
+                <div class="panel-heading">
 					<div class="breadscrumb">
 						<a href="{{path('site_forum_homepage')}}">Forum de guilde</a>
 						>
 						{{subForum.titre}}
-					</div>
-					<br/>
+					</div></div>
+                <div class="panel-body">
 					<a href="{{path('site_forum_createTopic', {'idSubForum' : idSubForum } )}}">
 						<button class="btn btn-primary" >Nouveau Topic</button>
 					</a>

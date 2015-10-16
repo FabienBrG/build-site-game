@@ -1,0 +1,7 @@
+site_news:
+    path:     /news
+    defaults: { _controller: SiteNewsBundle:Default:index }
+
+site_homepage:
+    path:     /
+    defaults: { _controller: SiteSiteBundle:Homepage:homepage }
